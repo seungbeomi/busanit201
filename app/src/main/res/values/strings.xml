@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TodoApp</string>
     <string name="action_settings">Settings</string>
+    <string name="successfully_saved_todo_message">TO-DO saved</string>
+    <string name="not_found_user">사용자정보가 존재하지 않습니다.</string>
+    <string name="title_activity_login">Todo App</string>
 </resources>
