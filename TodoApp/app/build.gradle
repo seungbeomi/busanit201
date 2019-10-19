@@ -38,6 +38,7 @@ def espressoVersion = '3.2.0'
 def supportLibraryVersion = '26.1.0'
 def rxjava2Version = '2.1.9'
 def rxandroidVersion = '2.0.2'
+def retrofitVersion = '2.6.2'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -76,4 +77,13 @@ dependencies {
     // reactive
     implementation "io.reactivex.rxjava2:rxjava:$rxjava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    //http logging
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
 }

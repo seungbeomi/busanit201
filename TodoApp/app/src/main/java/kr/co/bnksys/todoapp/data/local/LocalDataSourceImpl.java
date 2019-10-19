@@ -38,10 +38,12 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
     }
 
+    /*
     @Override
     public Single<User> login(@NonNull String email, @NonNull String password) {
         return mUserDao.login(email, password);
     }
+    */
 
     @Override
     public void saveTodo(@NonNull Todo todo) {

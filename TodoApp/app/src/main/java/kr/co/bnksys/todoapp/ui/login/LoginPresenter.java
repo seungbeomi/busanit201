@@ -1,11 +1,17 @@
 package kr.co.bnksys.todoapp.ui.login;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import javax.inject.Inject;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import kr.co.bnksys.todoapp.AppConstants;
 import kr.co.bnksys.todoapp.R;
 import kr.co.bnksys.todoapp.data.Repository;
 import kr.co.bnksys.todoapp.di.ActivityScoped;
@@ -50,8 +56,14 @@ public class LoginPresenter implements LoginContract.Presenter {
             ;
          */
 
-        // repository.login(email, password);
+        repository.login(email, password)
+            .subscribeOn(Schedulers.io())
+                .doOnError(throwable -> System.out.println("doOnError: " + throwable))
+             .observeOn(AndroidSchedulers.mainThread())
+            .subscribe((user, throwable) -> {
+                Log.d(AppConstants.TAG, "presenter");
+            });
 
-        view.goMain();
+        // view.goMain();
     }
 }

@@ -12,7 +12,7 @@ public interface LocalDataSource {
     // USER ------------------------------------
     void insertUser(@NonNull User user);
 
-    Single<User> login(@NonNull String email, @NonNull String password);
+    // Single<User> login(@NonNull String email, @NonNull String password);
 
     // TODO ------------------------------------
 

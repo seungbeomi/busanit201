@@ -62,7 +62,8 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Single<User> login(@NonNull String email, @NonNull String password) {
-        return localDataSource.login(email, password);
+        // return localDataSource.login(email, password);
+        return remoteDataSource.login(email, password);
     }
 
     @Override

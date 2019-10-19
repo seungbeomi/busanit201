@@ -7,4 +7,6 @@ public interface AppConstants {
 
     String DATABASE_NAME = "Todos.db";
 
+    String BASE_URL = "https://b4b30907.ngrok.io";
+
 }
