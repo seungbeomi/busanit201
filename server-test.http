@@ -1,0 +1,7 @@
+POST http://b4b30907.ngrok.io/users/auth
+Content-Type: application/json
+
+{
+    "email": "test@bnksys.co.kr",
+    "password": "1234"
+}
