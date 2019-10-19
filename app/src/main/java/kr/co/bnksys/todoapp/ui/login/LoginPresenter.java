@@ -2,8 +2,11 @@ package kr.co.bnksys.todoapp.ui.login;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import javax.inject.Inject;
 
+import kr.co.bnksys.todoapp.R;
 import kr.co.bnksys.todoapp.data.Repository;
 import kr.co.bnksys.todoapp.di.ActivityScoped;
 
