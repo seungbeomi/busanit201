@@ -2,7 +2,7 @@ package kr.co.bnksys.todoapp.ui.main;
 
 import java.util.List;
 
-import kr.co.bnksys.todoapp.data.local.entity.Todo;
+import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
 import kr.co.bnksys.todoapp.ui.base.BasePresenter;
 import kr.co.bnksys.todoapp.ui.base.BaseView;
 

@@ -1,14 +1,21 @@
 package kr.co.bnksys.todoapp.di.module;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import kr.co.bnksys.todoapp.di.ActivityScoped;
+import kr.co.bnksys.todoapp.di.base.ActivityScoped;
+import kr.co.bnksys.todoapp.di.module.ui.LoginModule;
 import kr.co.bnksys.todoapp.ui.login.LoginActivity;
-import kr.co.bnksys.todoapp.ui.login.LoginModule;
+import kr.co.bnksys.todoapp.ui.login.LoginContract;
+import kr.co.bnksys.todoapp.ui.login.LoginPresenter;
 import kr.co.bnksys.todoapp.ui.main.MainActivity;
-import kr.co.bnksys.todoapp.ui.main.MainModule;
+import kr.co.bnksys.todoapp.di.module.ui.MainModule;
+import kr.co.bnksys.todoapp.ui.main.MainContract;
+import kr.co.bnksys.todoapp.ui.main.MainPresenter;
 import kr.co.bnksys.todoapp.ui.regist.RegistActivity;
-import kr.co.bnksys.todoapp.ui.regist.RegistModule;
+import kr.co.bnksys.todoapp.di.module.ui.RegistModule;
+import kr.co.bnksys.todoapp.ui.regist.RegistContract;
+import kr.co.bnksys.todoapp.ui.regist.RegistPresenter;
 
 @Module
 public abstract class ActivityModule {
@@ -24,4 +31,5 @@ public abstract class ActivityModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = RegistModule.class)
     abstract RegistActivity registActivity();
+
 }

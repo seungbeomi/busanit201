@@ -1,4 +1,4 @@
-package kr.co.bnksys.todoapp.data.local.entity;
+package kr.co.bnksys.todoapp.data.todo.local.entity;
 
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;

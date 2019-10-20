@@ -1,6 +1,6 @@
 package kr.co.bnksys.todoapp.ui.regist;
 
-import kr.co.bnksys.todoapp.di.ActivityScoped;
+import kr.co.bnksys.todoapp.di.base.ActivityScoped;
 
 @ActivityScoped
 public class RegistPresenter implements RegistContract.Presenter {

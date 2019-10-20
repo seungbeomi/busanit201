@@ -1,4 +1,4 @@
-package kr.co.bnksys.todoapp.di;
+package kr.co.bnksys.todoapp.di.base;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -9,5 +9,5 @@ import javax.inject.Qualifier;
 @Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Local {
+public @interface Remote {
 }

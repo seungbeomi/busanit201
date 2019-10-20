@@ -10,9 +10,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import kr.co.bnksys.todoapp.AppConstants;
-import kr.co.bnksys.todoapp.data.Repository;
-import kr.co.bnksys.todoapp.data.local.entity.Todo;
-import kr.co.bnksys.todoapp.di.ActivityScoped;
+import kr.co.bnksys.todoapp.data.todo.TodoRepository;
+import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
+import kr.co.bnksys.todoapp.di.base.ActivityScoped;
 
 /**
  * Model과 View사이의 매개체
@@ -23,12 +23,12 @@ import kr.co.bnksys.todoapp.di.ActivityScoped;
 @ActivityScoped
 public class MainPresenter implements MainContract.Presenter {
 
-    private final Repository repository;
+    private final TodoRepository repository;
     private MainContract.View mainView;
 
     @Inject
     public MainPresenter(@Nullable MainContract.View mainView,
-                         @Nullable Repository repository) {
+                         @Nullable TodoRepository repository) {
         this.mainView = mainView;
         this.repository = repository;
     }
@@ -66,7 +66,7 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void loadTodos() {
         repository.refreshTodos();
-        repository.getTodos(new Repository.LoadTodosCallback() {
+        repository.getTodos(new TodoRepository.LoadTodosCallback() {
             @Override
             public void onTodosLoaded(List<Todo> todos) {
                 Log.d(AppConstants.TAG, "onTodosLoaded");

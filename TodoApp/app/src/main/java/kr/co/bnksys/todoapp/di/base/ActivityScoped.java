@@ -1,13 +1,13 @@
-package kr.co.bnksys.todoapp.di;
+package kr.co.bnksys.todoapp.di.base;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import javax.inject.Qualifier;
+import javax.inject.Scope;
 
-@Qualifier
 @Documented
+@Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Remote {
+public @interface ActivityScoped {
 }

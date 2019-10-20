@@ -12,28 +12,21 @@ import javax.inject.Singleton;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.disposables.CompositeDisposable;
 import kr.co.bnksys.todoapp.AppConstants;
-import kr.co.bnksys.todoapp.BuildConfig;
-import kr.co.bnksys.todoapp.data.Repository;
-import kr.co.bnksys.todoapp.data.RepositoryImpl;
-import kr.co.bnksys.todoapp.data.local.LocalDataSource;
-import kr.co.bnksys.todoapp.data.local.LocalDataSourceImpl;
-import kr.co.bnksys.todoapp.data.local.dao.TodoDao;
-import kr.co.bnksys.todoapp.data.local.dao.UserDao;
-import kr.co.bnksys.todoapp.data.remote.RemoteDataSource;
-import kr.co.bnksys.todoapp.data.remote.RemoteDataSourceImpl;
-import kr.co.bnksys.todoapp.data.remote.service.UserService;
-import kr.co.bnksys.todoapp.di.Local;
-import kr.co.bnksys.todoapp.di.Remote;
+import kr.co.bnksys.todoapp.data.todo.TodoRepository;
+import kr.co.bnksys.todoapp.data.todo.TodoRepositoryImpl;
+import kr.co.bnksys.todoapp.data.todo.local.TodoLocalDataSource;
+import kr.co.bnksys.todoapp.data.todo.local.TodoLocalDataSourceImpl;
+import kr.co.bnksys.todoapp.data.user.UserRepository;
+import kr.co.bnksys.todoapp.data.user.UserRepositoryImpl;
+import kr.co.bnksys.todoapp.data.todo.local.dao.TodoDao;
+import kr.co.bnksys.todoapp.data.user.remote.UserRemoteDataSource;
+import kr.co.bnksys.todoapp.data.user.remote.UserRemoteDataSourceImpl;
+import kr.co.bnksys.todoapp.data.base.AppDatabase;
+import kr.co.bnksys.todoapp.di.base.Local;
+import kr.co.bnksys.todoapp.di.base.Remote;
 import kr.co.bnksys.todoapp.util.AppExecutors;
 import kr.co.bnksys.todoapp.util.DiskIOThreadExecutor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public abstract class ApplicationModule {
@@ -41,37 +34,11 @@ public abstract class ApplicationModule {
     private static final int THREAD_COUNT = 3;
 
     @Singleton
-    @Binds
-    @Local
-    abstract LocalDataSource provideLocalDataSource(LocalDataSourceImpl dataSource);
-
-    @Singleton
-    @Binds
-    @Remote
-    abstract RemoteDataSource provideRemoteDataSource(RemoteDataSourceImpl dataSource);
-
-    @Singleton
-    @Binds
-    abstract Repository provideRepository(RepositoryImpl dataSource);
-
-    @Singleton
     @Provides
-    static AppDatabase provideTodoDatabase(Application context) {
+    static AppDatabase provideAppDatabase(Application context) {
         return Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, AppConstants.DATABASE_NAME)
                 .fallbackToDestructiveMigration()
                 .build();
-    }
-
-    @Singleton
-    @Provides
-    static TodoDao provideTodoDao(AppDatabase db) {
-        return db.todoDao();
-    }
-
-    @Singleton
-    @Provides
-    static UserDao provideUserDao(AppDatabase db) {
-        return db.userDao();
     }
 
     @Singleton
@@ -82,33 +49,37 @@ public abstract class ApplicationModule {
                 new AppExecutors.MainThreadExecutor());
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // REPOSITORY
+
     @Singleton
-    @Provides
-    static Retrofit provideRetrofit(String baseURL, OkHttpClient client) {
-        return new Retrofit.Builder()
-                .baseUrl(baseURL)
-                .client(client)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
+    @Binds
+    abstract UserRepository provideUserRepository(UserRepositoryImpl dataSource);
+
+    @Singleton
+    @Binds
+    abstract TodoRepository provideTodoRepository(TodoRepositoryImpl dataSource);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // DATASOURCE
+
+    @Singleton
+    @Binds
+    @Local
+    abstract TodoLocalDataSource provideTodoLocalDataSource(TodoLocalDataSourceImpl dataSource);
+
+    @Singleton
+    @Binds
+    @Remote
+    abstract UserRemoteDataSource provideUserRemoteDataSource(UserRemoteDataSourceImpl dataSource);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // DAO
 
     @Singleton
     @Provides
-    static UserService provideUserService() {
-        return provideRetrofit(AppConstants.BASE_URL, provideClient()).create(UserService.class);
-    }
-
-    @Singleton
-    @Provides
-    static OkHttpClient provideClient() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-
-        return new OkHttpClient.Builder().addInterceptor(interceptor).addInterceptor(chain -> {
-            Request request = chain.request();
-            return chain.proceed(request);
-        }).build();
+    static TodoDao provideTodoDao(AppDatabase db) {
+        return db.todoDao();
     }
 
 }

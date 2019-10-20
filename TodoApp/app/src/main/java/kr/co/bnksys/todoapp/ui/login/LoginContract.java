@@ -1,9 +1,5 @@
 package kr.co.bnksys.todoapp.ui.login;
 
-import java.util.Observable;
-
-import io.reactivex.Single;
-import kr.co.bnksys.todoapp.data.local.entity.User;
 import kr.co.bnksys.todoapp.ui.base.BasePresenter;
 import kr.co.bnksys.todoapp.ui.base.BaseView;
 

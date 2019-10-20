@@ -1,4 +1,4 @@
-package kr.co.bnksys.todoapp.data.remote;
+package kr.co.bnksys.todoapp.data.user.remote;
 
 import android.util.Log;
 
@@ -9,19 +9,19 @@ import javax.inject.Singleton;
 
 import io.reactivex.Single;
 import kr.co.bnksys.todoapp.AppConstants;
-import kr.co.bnksys.todoapp.data.local.entity.User;
-import kr.co.bnksys.todoapp.data.remote.service.UserService;
+import kr.co.bnksys.todoapp.data.user.remote.service.UserService;
+import kr.co.bnksys.todoapp.data.user.remote.service.pojo.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 @Singleton
-public class RemoteDataSourceImpl implements RemoteDataSource {
+public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     UserService userService;
 
     @Inject
-    public RemoteDataSourceImpl(UserService userService) {
+    public UserRemoteDataSourceImpl(UserService userService) {
         this.userService = userService;
     }
 
@@ -43,5 +43,6 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
         });
 
         //return userService.login(email, password);
+        return Single.just(new User());
     }
 }

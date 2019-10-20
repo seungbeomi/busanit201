@@ -1,4 +1,4 @@
-package kr.co.bnksys.todoapp.di;
+package kr.co.bnksys.todoapp.di.base;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

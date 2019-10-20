@@ -1,4 +1,4 @@
-package kr.co.bnksys.todoapp.data.local.dao;
+package kr.co.bnksys.todoapp.data.todo.local.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -8,7 +8,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import kr.co.bnksys.todoapp.data.local.entity.Todo;
+import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
 
 @Dao
 public interface TodoDao {

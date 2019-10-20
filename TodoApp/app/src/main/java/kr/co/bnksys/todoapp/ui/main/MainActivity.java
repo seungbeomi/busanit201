@@ -20,7 +20,7 @@ import butterknife.OnClick;
 import dagger.android.support.DaggerAppCompatActivity;
 import kr.co.bnksys.todoapp.AppConstants;
 import kr.co.bnksys.todoapp.R;
-import kr.co.bnksys.todoapp.data.local.entity.Todo;
+import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
 
 /**
  * View 담당

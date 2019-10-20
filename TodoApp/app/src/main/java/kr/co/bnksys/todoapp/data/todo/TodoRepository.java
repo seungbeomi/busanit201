@@ -1,16 +1,12 @@
-package kr.co.bnksys.todoapp.data;
+package kr.co.bnksys.todoapp.data.todo;
 
 import androidx.annotation.NonNull;
 
 import java.util.List;
 
-import io.reactivex.Single;
-import kr.co.bnksys.todoapp.data.local.entity.Todo;
-import kr.co.bnksys.todoapp.data.local.entity.User;
+import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
 
-public interface Repository {
-
-    Single<User> login(String email, String password);
+public interface TodoRepository {
 
     interface LoadTodosCallback {
 

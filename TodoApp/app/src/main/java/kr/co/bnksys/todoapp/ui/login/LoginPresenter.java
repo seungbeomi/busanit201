@@ -4,27 +4,23 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import javax.inject.Inject;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import kr.co.bnksys.todoapp.AppConstants;
-import kr.co.bnksys.todoapp.R;
-import kr.co.bnksys.todoapp.data.Repository;
-import kr.co.bnksys.todoapp.di.ActivityScoped;
+import kr.co.bnksys.todoapp.data.user.UserRepository;
+import kr.co.bnksys.todoapp.di.base.ActivityScoped;
 
 @ActivityScoped
 public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View view;
-    private Repository repository;
+    private UserRepository repository;
 
     @Inject
     public LoginPresenter(@Nullable LoginContract.View view,
-                          @Nullable Repository repository) {
+                          @Nullable UserRepository repository) {
         this.view = view;
         this.repository = repository;
     }
@@ -58,12 +54,11 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         repository.login(email, password)
             .subscribeOn(Schedulers.io())
-                .doOnError(throwable -> System.out.println("doOnError: " + throwable))
-             .observeOn(AndroidSchedulers.mainThread())
+            .doOnError(throwable -> System.out.println("doOnError: " + throwable))
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe((user, throwable) -> {
                 Log.d(AppConstants.TAG, "presenter");
+                view.goMain();
             });
-
-        // view.goMain();
     }
 }

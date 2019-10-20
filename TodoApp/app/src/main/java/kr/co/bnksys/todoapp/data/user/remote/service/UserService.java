@@ -1,4 +1,4 @@
-package kr.co.bnksys.todoapp.data.remote.service;
+package kr.co.bnksys.todoapp.data.user.remote.service;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

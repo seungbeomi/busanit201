@@ -1,4 +1,4 @@
-package kr.co.bnksys.todoapp.data;
+package kr.co.bnksys.todoapp.data.todo;
 
 import androidx.annotation.NonNull;
 
@@ -10,21 +10,16 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Single;
-import kr.co.bnksys.todoapp.data.local.LocalDataSource;
-import kr.co.bnksys.todoapp.data.local.entity.Todo;
-import kr.co.bnksys.todoapp.data.local.entity.User;
-import kr.co.bnksys.todoapp.data.remote.RemoteDataSource;
-import kr.co.bnksys.todoapp.di.Local;
-import kr.co.bnksys.todoapp.di.Remote;
+import kr.co.bnksys.todoapp.data.todo.local.TodoLocalDataSource;
+import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
+import kr.co.bnksys.todoapp.di.base.Local;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Singleton
-public class RepositoryImpl implements Repository {
+public class TodoRepositoryImpl implements  TodoRepository {
 
-    private final RemoteDataSource remoteDataSource;
-    private final LocalDataSource localDataSource;
+    private final TodoLocalDataSource localDataSource;
 
     /**
      * This variable has package local visibility so it can be accessed from tests.
@@ -37,9 +32,7 @@ public class RepositoryImpl implements Repository {
     boolean isCacheDirty = false;
 
     @Inject
-    public RepositoryImpl(@Remote RemoteDataSource remoteDataSource,
-                          @Local LocalDataSource localDataSource) {
-        this.remoteDataSource = remoteDataSource;
+    public TodoRepositoryImpl(@Local TodoLocalDataSource localDataSource) {
         this.localDataSource = localDataSource;
     }
 
@@ -58,12 +51,6 @@ public class RepositoryImpl implements Repository {
     @Override
     public void refreshTodos() {
         isCacheDirty = true;
-    }
-
-    @Override
-    public Single<User> login(@NonNull String email, @NonNull String password) {
-        // return localDataSource.login(email, password);
-        return remoteDataSource.login(email, password);
     }
 
     @Override
