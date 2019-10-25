@@ -17,10 +17,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.support.DaggerAppCompatActivity;
 import kr.co.bnksys.todoapp.AppConstants;
 import kr.co.bnksys.todoapp.R;
 import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
+import kr.co.bnksys.todoapp.ui.base.BaseActivity;
 
 /**
  * View 담당
@@ -32,7 +32,7 @@ import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
  * 5. Entity -> DTO 변환
  * 6. 결과값 설정
  */
-public class MainActivity extends DaggerAppCompatActivity implements MainContract.View {
+public class MainActivity extends BaseActivity implements MainContract.View {
 
     private MainRecyclerViewAdapter adapter;
 

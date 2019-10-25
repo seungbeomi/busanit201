@@ -1,19 +1,13 @@
 package kr.co.bnksys.todoapp.data.user.remote;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Single;
-import kr.co.bnksys.todoapp.AppConstants;
 import kr.co.bnksys.todoapp.data.user.remote.service.UserService;
 import kr.co.bnksys.todoapp.data.user.remote.service.pojo.User;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 @Singleton
 public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -27,6 +21,12 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     @Override
     public Single<User> login(@NonNull String email, @NonNull String password) {
+
+        return userService.login(email, password)
+                .map(userWrapperResponse -> {
+                    return userWrapperResponse.getData();
+                });
+        /*
         Call<String> response = userService.login(email, password);
         response.enqueue(new Callback<String>() {
             @Override
@@ -44,5 +44,7 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
         //return userService.login(email, password);
         return Single.just(new User());
+        */
+
     }
 }

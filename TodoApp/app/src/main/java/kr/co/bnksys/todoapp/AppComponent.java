@@ -8,10 +8,9 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
-import kr.co.bnksys.todoapp.di.base.AppModule;
+import kr.co.bnksys.todoapp.di.module.AppModule;
 import kr.co.bnksys.todoapp.di.module.ActivityModule;
 import kr.co.bnksys.todoapp.di.module.ApplicationModule;
-import kr.co.bnksys.todoapp.di.module.RemoteModule;
 
 /**
  * App 과 동일한 디렉토리에 있어야함
@@ -21,7 +20,6 @@ import kr.co.bnksys.todoapp.di.module.RemoteModule;
 @Component(modules = {
         AppModule.class,
         ApplicationModule.class,
-        RemoteModule.class,
         ActivityModule.class,
         AndroidSupportInjectionModule.class})
 public interface AppComponent extends AndroidInjector<App> {

@@ -6,9 +6,11 @@ import android.os.Bundle;
 
 import javax.inject.Inject;
 
+import dagger.android.support.DaggerAppCompatActivity;
 import kr.co.bnksys.todoapp.R;
+import kr.co.bnksys.todoapp.ui.base.BaseActivity;
 
-public class RegistActivity extends AppCompatActivity implements RegistContract.View  {
+public class RegistActivity extends BaseActivity implements RegistContract.View  {
 
     @Inject
     public RegistActivity() {

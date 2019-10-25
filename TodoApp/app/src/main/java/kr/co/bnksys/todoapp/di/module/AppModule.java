@@ -1,4 +1,4 @@
-package kr.co.bnksys.todoapp.di.base;
+package kr.co.bnksys.todoapp.di.module;
 
 import android.app.Application;
 import android.content.Context;

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import kr.co.bnksys.todoapp.AppConstants;
 import kr.co.bnksys.todoapp.data.user.UserRepository;
@@ -17,12 +18,15 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View view;
     private UserRepository repository;
+    private CompositeDisposable disposable;
 
     @Inject
     public LoginPresenter(@Nullable LoginContract.View view,
-                          @Nullable UserRepository repository) {
+                          @Nullable UserRepository repository,
+                          @Nullable CompositeDisposable disposable) {
         this.view = view;
         this.repository = repository;
+        this.disposable = disposable;
     }
 
     @Override
@@ -33,6 +37,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void dropView() {
         view = null;
+        disposable.clear();
     }
 
     @Override
@@ -52,13 +57,14 @@ public class LoginPresenter implements LoginContract.Presenter {
             ;
          */
 
-        repository.login(email, password)
+        disposable.add(repository.login(email, password)
             .subscribeOn(Schedulers.io())
             .doOnError(throwable -> System.out.println("doOnError: " + throwable))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe((user, throwable) -> {
-                Log.d(AppConstants.TAG, "presenter");
+                Log.d(AppConstants.TAG, user.getName());
                 view.goMain();
-            });
+            }));
     }
+
 }

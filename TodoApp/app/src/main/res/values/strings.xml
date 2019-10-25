@@ -4,4 +4,6 @@
     <string name="successfully_saved_todo_message">TO-DO saved</string>
     <string name="not_found_user">사용자정보가 존재하지 않습니다.</string>
     <string name="title_activity_login">Todo App</string>
+
+    <string name="some_error">Something went wrong</string>
 </resources>
