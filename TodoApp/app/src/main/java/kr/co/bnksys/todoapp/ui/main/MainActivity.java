@@ -34,6 +34,8 @@ import kr.co.bnksys.todoapp.ui.base.BaseActivity;
  */
 public class MainActivity extends BaseActivity implements MainContract.View {
 
+    private final String TAG = this.getClass().getName();
+
     private MainRecyclerViewAdapter adapter;
 
     @Inject
@@ -52,7 +54,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             return;
         }
 
-        Log.d(AppConstants.TAG, todo);
+        Log.d(TAG, todo);
         presenter.saveTodo(todo);
     }
 

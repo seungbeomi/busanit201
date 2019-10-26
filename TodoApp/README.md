@@ -3,7 +3,7 @@
 이름 : 손승범
 
 완성도
-    [X] Login
+    [O] Login
     [X] Register
     [O] List
     [O] Write

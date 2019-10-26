@@ -8,7 +8,9 @@ router.post('/auth', function(req, res, next) {
   const password = req.body.password;
 
   res.json({ 
-    result : (email == "test@bnksys.co.kr" && password == "1234")
+    //result : (email == "test@bnksys.co.kr" && password == "1234")
+    email: email,
+    name: 'seungbeomi'
   });
 });
 

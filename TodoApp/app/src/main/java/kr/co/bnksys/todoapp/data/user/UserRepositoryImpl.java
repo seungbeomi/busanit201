@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 import kr.co.bnksys.todoapp.data.todo.local.entity.Todo;
 import kr.co.bnksys.todoapp.data.user.remote.UserRemoteDataSource;
@@ -36,7 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Single<User> login(@NonNull String email, @NonNull String password) {
+    public Maybe<User> login(@NonNull String email, @NonNull String password) {
         // return localDataSource.login(email, password);
         return remoteDataSource.login(email, password);
     }

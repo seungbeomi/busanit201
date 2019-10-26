@@ -1,5 +1,6 @@
 package kr.co.bnksys.todoapp.data.user.remote.service;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 import kr.co.bnksys.todoapp.data.base.WrapperResponse;
 import kr.co.bnksys.todoapp.data.user.remote.service.pojo.User;
@@ -13,6 +14,7 @@ public interface UserService {
     @FormUrlEncoded
     @POST("users/auth")
     //Call<String> login(@Field("email") String email, @Field("password") String password);
-    Single<WrapperResponse<User>> login(@Field("email") String email, @Field("password") String password);
+    //Single<WrapperResponse<User>> login(@Field("email") String email, @Field("password") String password);
+    Maybe<User> login(@Field("email") String email, @Field("password") String password);
 
 }

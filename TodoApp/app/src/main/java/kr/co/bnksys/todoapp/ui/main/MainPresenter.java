@@ -23,6 +23,7 @@ import kr.co.bnksys.todoapp.di.base.ActivityScoped;
 @ActivityScoped
 public class MainPresenter implements MainContract.Presenter {
 
+    private final String TAG = this.getClass().getName();
     private final TodoRepository repository;
     private MainContract.View mainView;
 
@@ -69,12 +70,12 @@ public class MainPresenter implements MainContract.Presenter {
         repository.getTodos(new TodoRepository.LoadTodosCallback() {
             @Override
             public void onTodosLoaded(List<Todo> todos) {
-                Log.d(AppConstants.TAG, "onTodosLoaded");
+                Log.d(TAG, "onTodosLoaded");
                 mainView.showTodos(todos);
             }
             @Override
             public void onDataNotAvailable() {
-                Log.d(AppConstants.TAG, "onDataNotAvailable");
+                Log.d(TAG, "onDataNotAvailable");
             }
         });
     }

@@ -5,12 +5,14 @@ import androidx.annotation.NonNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Single;
+import io.reactivex.Maybe;
 import kr.co.bnksys.todoapp.data.user.remote.service.UserService;
 import kr.co.bnksys.todoapp.data.user.remote.service.pojo.User;
 
 @Singleton
 public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
+
+    private final String TAG = this.getClass().getName();
 
     UserService userService;
 
@@ -20,12 +22,8 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
 
     @Override
-    public Single<User> login(@NonNull String email, @NonNull String password) {
-
-        return userService.login(email, password)
-                .map(userWrapperResponse -> {
-                    return userWrapperResponse.getData();
-                });
+    public Maybe<User> login(@NonNull String email, @NonNull String password) {
+         return userService.login(email, password);
         /*
         Call<String> response = userService.login(email, password);
         response.enqueue(new Callback<String>() {

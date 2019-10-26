@@ -9,6 +9,8 @@ import dagger.android.DaggerApplication;
 
 public class App extends DaggerApplication {
 
+    private final String TAG = this.getClass().getName();
+
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerAppComponent.builder().application(this).build();
@@ -24,7 +26,7 @@ public class App extends DaggerApplication {
     }
 
     private void debugConfig() {
-        Log.d(AppConstants.TAG, "::: DEBUG MODE :::");
+        Log.d(TAG, "::: DEBUG MODE :::");
         Stetho.initializeWithDefaults(this);
     }
 }

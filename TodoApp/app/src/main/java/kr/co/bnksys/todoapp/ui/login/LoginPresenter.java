@@ -8,13 +8,18 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import kr.co.bnksys.todoapp.AppConstants;
 import kr.co.bnksys.todoapp.data.user.UserRepository;
+import kr.co.bnksys.todoapp.data.user.remote.service.pojo.User;
 import kr.co.bnksys.todoapp.di.base.ActivityScoped;
 
 @ActivityScoped
 public class LoginPresenter implements LoginContract.Presenter {
+
+    private final String TAG = this.getClass().getName();
 
     private LoginContract.View view;
     private UserRepository repository;
@@ -59,11 +64,23 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         disposable.add(repository.login(email, password)
             .subscribeOn(Schedulers.io())
-            .doOnError(throwable -> System.out.println("doOnError: " + throwable))
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe((user, throwable) -> {
-                Log.d(AppConstants.TAG, user.getName());
-                view.goMain();
+            .subscribe(new Consumer<User>() {
+                @Override
+                public void accept(User user) throws Exception {
+                    Log.d(TAG, "onSuccess user = " + user.toString());
+                    view.goMain();
+                }
+            }, new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Exception {
+                    view.hideLoading();
+                    Log.e(TAG, "Throwable = " + throwable.toString());
+                }
+            }, new Action() {
+                @Override
+                public void run() throws Exception {
+                    Log.d(TAG, "onComplete user");
+                }
             }));
     }
 
